@@ -22,7 +22,7 @@ import de.lichtflut.infra.Infra;
 import de.lichtflut.infra.logging.Log;
 
 /**
- * asynchronous executor of orders.
+ * Asynchronous executor of orders.
  * 
  * Created: 28.01.2009
  *
@@ -35,12 +35,16 @@ public class OrderExecutor implements Runnable {
 	
 	//-----------------------------------------------------
 	
+	/**
+	 * Default constructor.
+	 */
 	public OrderExecutor() {}
 	
 	//-----------------------------------------------------
 	
 	/**
 	 * add an order that will be executed in another Thread.
+	 * @param order The order to be executed later.
 	 */
 	public void addOrder(final Order order){
 		orders.add(order);
@@ -49,8 +53,8 @@ public class OrderExecutor implements Runnable {
 	// -----------------------------------------------------
 	
 	/**
-	 * starts the executor.
-	 * may only be called once.
+	 * Starts the executor.
+	 * May only be called once.
 	 */
 	public void startExecutor(){
 		if (running){

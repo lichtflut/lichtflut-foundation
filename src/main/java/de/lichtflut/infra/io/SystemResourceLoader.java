@@ -22,8 +22,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Properties;
 
-import de.lichtflut.infra.logging.Log;
-
 /**
  * Technical helper class for loading of resources.
  * 
@@ -68,7 +66,6 @@ public class SystemResourceLoader {
 		if (uri.startsWith(RESOURCE_PREFIX)){
 			ClassLoader cl = Thread.currentThread().getContextClassLoader();
 			URL url = cl.getResource(uri.substring(RESOURCE_PREFIX.length()));
-			Log.info(this, "found resource: " + url);
 			return url;
 		} else {
 			try {
@@ -94,7 +91,6 @@ public class SystemResourceLoader {
 				if (url == null){
 					throw new ResourceException("Resource with URL '" + uri + "' not found by ClassLoader " + cl.toString());
 				}
-				Log.debug(this, "found resource: " + url);
 				return url.openStream();
 			} else {
 				return new FileInputStream(uri);
