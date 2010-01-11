@@ -31,6 +31,13 @@ import java.util.Set;
  */
 public abstract class DirectedNode {
 	
+	private List<DirectedNode> predecessors = new ArrayList<DirectedNode>();
+	private Set<DirectedNode> successors = new HashSet<DirectedNode>();
+	
+	private boolean endNode = false;
+	
+	// -----------------------------------------------------
+	
 	/**
 	 * Append a new DirectedNode.
 	 * Successors are sorted, first mandatory, than optional
@@ -109,11 +116,4 @@ public abstract class DirectedNode {
 		successors.add(node);
 	}
 	
-	// ------------------------------------------------------
-
-	private List<DirectedNode> predecessors = new ArrayList<DirectedNode>();
-	private Set<DirectedNode> successors = new HashSet<DirectedNode>();
-	
-	private boolean endNode = false;
-
 }

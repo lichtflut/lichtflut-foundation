@@ -18,7 +18,6 @@ package de.lichtflut.infra.ui.flow;
 import de.lichtflut.infra.Infra;
 import de.lichtflut.infra.threading.Order;
 
-
 /**
  * A handle (reference) of a {@link Flow}.
  * 
@@ -56,6 +55,7 @@ public class FlowHandle implements FlowEventListener, Order {
 	
 	/**
 	 * Executes the flow and returns when it is finished.
+	 * @see Order
 	 */
 	public void execute(){
 		executor.stepForward();
@@ -65,9 +65,17 @@ public class FlowHandle implements FlowEventListener, Order {
 	}
 	
 	/**
+	 * Add a action to be processed after flow has finished.
+	 * @param action The action to run.
+	 */
+	public void addPostProcessor(final Runnable action){
+		addListener(new AfterFlowAction(action));
+	}
+	
+	/**
 	 * Add a new listener.
 	 */
-	public void addListener(FlowEventListener listener){
+	public void addListener(final FlowEventListener listener){
 		flow.addFlowListener(listener);
 	}
 	

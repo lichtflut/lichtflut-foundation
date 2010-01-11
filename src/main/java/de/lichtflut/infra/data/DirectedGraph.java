@@ -20,15 +20,18 @@ import java.util.HashSet;
 
 
 /**
- * Copyright 2006 by Oliver Tigges
- *
- * @author Oliver Tigges
+ * The DirectedGraph with the possible routes through a Stream.
  *
  * Created: 12.03.2006
  * 
- * Description: The DirectedGraph with the possible routes through a Stream
+ * @author Oliver Tigges
  */
 public class DirectedGraph implements Cloneable{
+	
+	// Pseudo Node for Beginning 
+	protected final DirectedNode START;
+	
+	// -----------------------------------------------------
 
 	/**
 	 * DefaultConstructor
@@ -78,10 +81,5 @@ public class DirectedGraph implements Cloneable{
 		}
 		return sb.toString();
 	}
-	
-	// ------------------------------------------------------
-	
-	// Pseudo Node for Beginning 
-	protected final DirectedNode START;
 	
 }
