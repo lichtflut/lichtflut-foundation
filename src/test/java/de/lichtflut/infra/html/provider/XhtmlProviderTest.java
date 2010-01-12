@@ -16,7 +16,7 @@
 /**
  * 
  */
-package org.arastreju.infra.html.provider;
+package de.lichtflut.infra.html.provider;
 
 import java.io.IOException;
 import java.io.Reader;

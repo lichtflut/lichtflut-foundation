@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 package de.lichtflut.infra.jdbc;
+
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.StringReader;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import junit.framework.TestCase;

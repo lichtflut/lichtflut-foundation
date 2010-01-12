@@ -15,43 +15,48 @@
  */
 package de.lichtflut.infra.logging;
 
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.LoggerFactory;
+
 
 /**
- * Wrapper for Logging.
+ * <p>
+ * 	Simple util class for static logging using SL4J.
+ * </p>
  * 
- * Created: 12.08.2004 
+ * <p>
+ * 	Created: 12.08.2004 
+ * </p>
  * 
  * @author Oliver Tigges
  */
 public class Log {
 	
 	public static void debug(Object caller, String msg){
-		LogFactory.getLog(getClassname(caller)).debug(msg);
+		LoggerFactory.getLogger(getClassname(caller)).debug(msg);
 	}
 	
 	public static void info(Object caller, String msg){
-		LogFactory.getLog(getClassname(caller)).info(msg);
+		LoggerFactory.getLogger(getClassname(caller)).info(msg);
 	}
 	
 	public static void info(String logger, String msg){
-		LogFactory.getLog(logger).info(msg.toString());
+		LoggerFactory.getLogger(logger).info(msg.toString());
 	}
 	
 	public static void warn(Object caller, String msg){
-		LogFactory.getLog(getClassname(caller)).warn(msg);
+		LoggerFactory.getLogger(getClassname(caller)).warn(msg);
 	}
 	
 	public static void error(Object caller, String msg){
-		LogFactory.getLog(getClassname(caller)).error(msg);
+		LoggerFactory.getLogger(getClassname(caller)).error(msg);
 	}
 	
 	public static void exception(Object caller, Throwable e, String msg){
-		LogFactory.getLog(getClassname(caller)).error(msg, e);
+		LoggerFactory.getLogger(getClassname(caller)).error(msg, e);
 	}
 	
 	public static void currentStack(Object caller){
-		LogFactory.getLog(getClassname(caller)).error("current stack: ", new RuntimeException());
+		LoggerFactory.getLogger(getClassname(caller)).error("current stack: ", new RuntimeException());
 	}
 	
 	//-----------------------------------------------------

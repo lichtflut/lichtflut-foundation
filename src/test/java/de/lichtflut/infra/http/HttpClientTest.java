@@ -16,27 +16,34 @@
 /**
  * 
  */
-package org.arastreju.infra;
+package de.lichtflut.infra.http;
+
+import java.util.Collections;
 
 import junit.framework.TestCase;
-
-import org.apache.commons.logging.LogFactory;
+import de.lichtflut.infra.http.HttpClient;
+import de.lichtflut.infra.http.HttpRequestException;
 
 /**
+ * 
  * Copyright 2008 by Oliver Tigges
  * 
  * @author Oliver Tigges
  * 
- * Created: 12.06.2008
+ * Created: 02.12.2008
  *
- * Description: 
+ * Description:
  */
-public class LoggingTest extends TestCase {
-	
-	public void testJCL(){
-		LogFactory.getLog("hallo").info("info");
-		LogFactory.getLog("hallo").debug("should not be outputted");
-		LogFactory.getLog("debugger").debug("debug");
-	}
+public class HttpClientTest extends TestCase {
 
+	public void testGet(){
+		HttpClient client = new HttpClient();
+		try {
+			client.send("http://www.heise.de", "GET", Collections.<String, Object>emptyMap());
+		} catch (HttpRequestException e) {
+			e.printStackTrace();
+			fail();
+		}
+	}
+	
 }
