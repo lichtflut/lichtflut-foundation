@@ -11,7 +11,7 @@
 	<groupId>de.lichtflut</groupId>
 	<artifactId>infra</artifactId>
 	<name>Foundation Infrastructure</name>
-	<version>${parent.version}</version>
+	<version>1.0.5-SNAPSHOT</version>
 	<description>infrastructure stuff</description>
 	
 	<build>
