@@ -57,6 +57,11 @@ public abstract class AbstractFlowModel {
 	// ------------------------------------------------------
 	
 	@SuppressWarnings("unchecked")
+	protected void fireModelChange(){
+		fireModelChange(new ModelChangeEvent(ACTION_SOURCE_ANY));
+	}
+	
+	@SuppressWarnings("unchecked")
 	protected void fireModelChange(final String id){
 		fireModelChange(new ModelChangeEvent(id));
 	}
@@ -68,7 +73,8 @@ public abstract class AbstractFlowModel {
 	@SuppressWarnings("unchecked")
 	protected void fireModelChange(final ModelChangeEvent<?> e){
 		for (ModelChangeListener l : listeners.keySet()) {
-			if (Infra.equals(e.getSource(), listeners.get(l))){
+			final String source = listeners.get(l);
+			if (ACTION_SOURCE_ANY.equals(source) || Infra.equals(e.getSource(), source)){
 				l.modelChanged(e);
 			}
 		}

@@ -109,7 +109,7 @@ public abstract class SuggestingComboBox<T> extends JComboBox
 		initialize("");
 	}
 	
-	public void initialize(String text){
+	public void initialize(final String text){
 		ignoreChanges = true;
 		editor.setText(text);
 		editor.selectAll();
@@ -118,7 +118,7 @@ public abstract class SuggestingComboBox<T> extends JComboBox
 		ignoreChanges = false;
 	}
 	
-	public void setText(String text) {
+	public void setText(final String text) {
 		editor.setText(text);
 	}
 	
