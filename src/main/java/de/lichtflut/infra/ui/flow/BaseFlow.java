@@ -57,7 +57,8 @@ public abstract class BaseFlow implements Flow {
 		return null;
 	}
 	
-	public void reactivate(FlowDataTransfer subFlowResult) {
+	public void reactivate(final FlowDataTransfer subFlowResult) {
+		// to be implemented by sub flows.
 	}
 
 	/* (non-Javadoc)

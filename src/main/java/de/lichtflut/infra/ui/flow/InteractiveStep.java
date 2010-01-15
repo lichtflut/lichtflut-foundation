@@ -23,7 +23,7 @@ package de.lichtflut.infra.ui.flow;
  *
  * @author Oliver Tigges
  */
-public abstract class InteractiveStep implements Step, DataTransferKeys {
+public abstract class InteractiveStep implements Step {
 	
 	private FlowDataTransfer transfer;
 	

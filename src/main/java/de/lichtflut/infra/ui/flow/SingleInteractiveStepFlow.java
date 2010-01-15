@@ -22,7 +22,7 @@ package de.lichtflut.infra.ui.flow;
  *
  * @author Oliver Tigges
  */
-public abstract class SingleInteractiveStepFlow extends BaseFlow implements Step, DataTransferKeys {
+public abstract class SingleInteractiveStepFlow extends BaseFlow implements Step {
 
 	private FlowDataTransfer transfer;
 	
