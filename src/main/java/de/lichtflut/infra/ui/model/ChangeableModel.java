@@ -13,21 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.lichtflut.infra.ui.event;
+package de.lichtflut.infra.ui.model;
 
 /**
  * <p>
- * 	Common model change listener.
+ *  base interface for model that can be changed by requests.
  * </p>
  * 
  * <p>
- * 	Created: 19.05.2009
+ * 	Created 19.01.2010
  * </p>
- * 
- * @author Oliver Tigges 
+ *
+ * @author Oliver Tigges
  */
-public interface ModelObserver<T> {
-	
-	void modelChanged(ModelChangeEvent<T> evt);
+public interface ChangeableModel {
 
+	/**
+	 * Request a model change.
+	 * @param request The request object.
+	 */
+	void updateModel(final ModelChangeRequest<?> request);
 }

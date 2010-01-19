@@ -19,9 +19,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import de.lichtflut.infra.Infra;
-import de.lichtflut.infra.ui.event.ModelChangeEvent;
-import de.lichtflut.infra.ui.event.ModelObserver;
-import de.lichtflut.infra.ui.event.ModelChangeType;
+import de.lichtflut.infra.ui.model.ModelChangeEvent;
+import de.lichtflut.infra.ui.model.ModelChangeType;
+import de.lichtflut.infra.ui.model.ModelObserver;
 
 /**
  * Abstract base for models backing flow views.

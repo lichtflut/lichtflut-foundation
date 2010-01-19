@@ -17,7 +17,7 @@ package de.lichtflut.infra.ui.flow;
 
 import javax.swing.JPanel;
 
-import de.lichtflut.infra.ui.event.ModelObserver;
+import de.lichtflut.infra.ui.model.ModelObserver;
 
 /**
  * The view of an interactive step.

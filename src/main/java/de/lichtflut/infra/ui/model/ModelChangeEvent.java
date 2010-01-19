@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.lichtflut.infra.ui.event;
+package de.lichtflut.infra.ui.model;
 
 /**
  * <p>

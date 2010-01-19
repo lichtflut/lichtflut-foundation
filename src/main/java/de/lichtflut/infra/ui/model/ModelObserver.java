@@ -13,29 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.lichtflut.infra.ui.event;
+package de.lichtflut.infra.ui.model;
 
 /**
  * <p>
- *  Base interface for models where observers can be registered to detect changes.
+ * 	Common model change listener.
  * </p>
  * 
  * <p>
- * 	Created 19.01.2010
+ * 	Created: 19.05.2009
  * </p>
- *
- * @author Oliver Tigges
+ * 
+ * @author Oliver Tigges 
  */
-public interface ObservableModel {
-
-	/**
-	 * Registers an observer for given change type.
-	 */
-	void registerObserver(final String source, final ModelObserver<?> observer);
-
-	/**
-	 * Unregisters an observer.
-	 */
-	void unregisterObserver(final String source, final ModelObserver<?> observer);
+public interface ModelObserver<T> {
 	
+	void modelChanged(ModelChangeEvent<T> evt);
+
 }

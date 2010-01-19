@@ -16,7 +16,7 @@
 package de.lichtflut.infra.ui.flow;
 
 import de.lichtflut.infra.threading.OrderExecutor;
-import de.lichtflut.infra.ui.event.ModelChangeEvent;
+import de.lichtflut.infra.ui.model.ModelChangeRequest;
 
 /**
  * <p>
@@ -51,7 +51,7 @@ public interface FlowExecutor {
 	
 	// -----------------------------------------------------
 	
-	void sendEvent(ModelChangeEvent<?> evt);
+	void sendEvent(ModelChangeRequest<?> request);
 	
 	//-----------------------------------------------------
 	
