@@ -16,23 +16,22 @@
 package de.lichtflut.infra.ui.flow;
 
 import de.lichtflut.infra.threading.OrderExecutor;
+import de.lichtflut.infra.ui.event.ModelChangeEvent;
 
 /**
- * Interface for the executor of {@link Flow}s.
+ * <p>
+ * 	Interface for the executor of {@link Flow}s.
+ * </p>
  * 
- * Created: 02.03.2008 
+ * <p>
+ *  Created: 02.03.2008 
+ * </p>
  *
  * @author Oliver Tigges
  */
 public interface FlowExecutor {
 	
-	OrderExecutor getOrderExecutor();
-	
-	//-----------------------------------------------------
-	
 	FlowHandle registerFlow(Flow flow);
-	
-	void terminateFlow();
 	
 	//-----------------------------------------------------
 	
@@ -41,6 +40,8 @@ public interface FlowExecutor {
 	void stepBack();
 	
 	boolean hasNext();
+	
+	void terminateFlow();
 
 	//-----------------------------------------------------
 	
@@ -48,8 +49,16 @@ public interface FlowExecutor {
 	
 	void stopInteraction(Step step);
 	
+	// -----------------------------------------------------
+	
+	void sendEvent(ModelChangeEvent<?> evt);
+	
 	//-----------------------------------------------------
 	
-	String getCurrentFlowPath();
+	/**
+	 * Obtain the {@link OrderExecutor} associated with this flow.
+	 * @return The Order Executor.
+	 */
+	OrderExecutor getOrderExecutor();
 		
 }

@@ -16,10 +16,14 @@
 package de.lichtflut.infra.ui.event;
 
 /**
- * Common model change listener.
+ * <p>
+ * 	Common model change listener.
+ * </p>
  * 
- * Created: 19.05.2009
- *
+ * <p>
+ * 	Created: 19.05.2009
+ * </p>
+ * 
  * @author Oliver Tigges 
  */
 public interface ModelChangeListener<T> {
