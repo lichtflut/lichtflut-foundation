@@ -30,7 +30,7 @@ import de.lichtflut.infra.data.LabeledObject;
  *
  * @author Oliver Tigges
  */
-public interface SuggestionController<T> extends SelectionListener<T> {
+public interface SuggestionProvider<T> {
 	
 	/**
 	 * Find suggestions for given text.

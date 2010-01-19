@@ -31,9 +31,13 @@ import de.lichtflut.infra.data.LabeledObject;
 import de.lichtflut.infra.logging.Log;
 
 /**
- * Editable select box that contains suggestions based on user input. 
+ * <p>
+ * 	Editable select box that contains suggestions based on user input. 
+ * </p>
  * 
- * Created: 18.08.2008
+ * <p>
+ *  Created: 18.08.2008
+ * </p>
  *
  * @author Oliver Tigges
  */
@@ -43,8 +47,7 @@ public abstract class SuggestingComboBox<T> extends JComboBox
 
 	protected final SuggestionInputField editor;
 	protected final SuggestionComboBoxModel<T> model;
-	protected final SuggestionController<T> controller;
-	protected final String ID; 
+	protected final SuggestionProvider<T> provider;
 	
 	private boolean ignoreChanges;
 	private boolean resetOnSelection;
@@ -54,11 +57,20 @@ public abstract class SuggestingComboBox<T> extends JComboBox
 	/**
 	 * Constructor.
 	 */
-	public SuggestingComboBox(final SuggestionController<T> controller, int size, String id) {
-		this.model = new SuggestionComboBoxModel<T>();
+	public SuggestingComboBox(final SuggestionComboBoxModel<T> model, int size) {
+		this(model, model.getProvider(), size);
+	}
+	
+	/**
+	 * Constructor.
+	 */
+	public SuggestingComboBox(final SuggestionComboBoxModel<T> model, final SuggestionProvider<T> provider, int size) {
+		if (provider == null){
+			throw new IllegalArgumentException("SuggestionProvider must be given!");
+		}
+		this.model = model;
+		this.provider = provider;
 		this.editor = new SuggestionInputField(this, size);
-		this.controller = controller;
-		this.ID = id;
 		
 		final SelectObserver observer = new SelectObserver();
 		editor.addKeyListener(observer);
@@ -81,10 +93,10 @@ public abstract class SuggestingComboBox<T> extends JComboBox
 		LabeledObject<T> wrapper = model.findByLabel(text);
 		if (wrapper != null){
 			T value = wrapper.getValue();
-			fireElementSelected(value);
+			model.fireElementSelected(value);
 			reset();
 		} else {
-			fireSelectionFailed();
+			model.fireSelectionFailed();
 		}
 	}
 	
@@ -93,11 +105,10 @@ public abstract class SuggestingComboBox<T> extends JComboBox
 	 * The listeners for this {@link SuggestingComboBox} will be notified.
 	 * @param selected The selected item.
 	 */
-	@SuppressWarnings("unchecked")
 	public void suggestionSelected() {
-		LabeledObject<T> wrapper = (LabeledObject<T>) model.getSelectedItem();
+		LabeledObject<T> wrapper = model.getSelectedItem();
 		T value = wrapper.getValue();
-		fireElementSelected(value);
+		model.fireElementSelected(value);
 		if (isResetOnSelection()){
 			reset();
 		} else {
@@ -146,14 +157,15 @@ public abstract class SuggestingComboBox<T> extends JComboBox
 	/**
 	 * called when text in input field is changed.
 	 */
-	public void onTextChange(String text) {
+	public void onTextChange(final String text) {
 		if (ignoreChanges){
 			return;
 		}
 		ignoreChanges = true;
-		final List<LabeledObject<T>> suggestions = controller.getSuggestions(text);
+		
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
+				final List<LabeledObject<T>> suggestions = provider.getSuggestions(text);
 				model.removeSuggestions();
 				model.addSuggestions(suggestions);
 				updateFinished();
@@ -171,18 +183,6 @@ public abstract class SuggestingComboBox<T> extends JComboBox
 		}
 	}
 	
-	protected void fireElementSelected(T value){
-		if (controller != null){
-			controller.elementSelected(value, ID);
-		}
-	}
-	
-	protected void fireSelectionFailed(){
-		if (controller != null){
-			controller.selectionFailed(ID);
-		}
-	}
-
 	public void setResetOnSelection(boolean resetOnSelection) {
 		this.resetOnSelection = resetOnSelection;
 	}

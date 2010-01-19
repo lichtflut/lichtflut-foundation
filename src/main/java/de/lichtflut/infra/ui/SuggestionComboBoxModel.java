@@ -24,9 +24,13 @@ import javax.swing.ComboBoxModel;
 import de.lichtflut.infra.data.LabeledObject;
 
 /**
- * Model for {@link SuggestingComboBox}.
+ * <p>
+ * 	Model for {@link SuggestingComboBox}.
+ * </p>
  * 
- * Created: 21.07.2008
+ * <p>
+ * 	Created: 21.07.2008
+ * </p>
  *
  * @author Oliver Tigges
  */
@@ -34,27 +38,129 @@ public class SuggestionComboBoxModel<T> extends AbstractListModel implements Com
 
 	private final List<LabeledObject<T>> suggestions = new ArrayList<LabeledObject<T>>(20);
 	
+	private final List<SelectionListener<T>> listeners = new ArrayList<SelectionListener<T>>();
+	
+	private final String ID; 
+	
+	private final SuggestionProvider<T> provider;
+	
 	private int selectionIndex = -1;
 	
 	//-----------------------------------------------------
+
+	/**
+	 * Default constructor.
+	 */
+	public SuggestionComboBoxModel() {
+		this(null);
+	}
 	
+	/**
+	 * Constructor.
+	 * @param The provider for suggestions.
+	 */
+	public SuggestionComboBoxModel(final SuggestionProvider<T> provider) {
+		this(provider, "<default>");
+	}
+	
+	/**
+	 * Constructor.
+	 * @param The provider for suggestions.
+	 * @param id
+	 */
+	public SuggestionComboBoxModel(final SuggestionProvider<T> provider, final String id) {
+		this.ID = id;
+		this.provider = provider;
+	}
+	
+	// -----------------------------------------------------
+	
+	/**
+	 * Remove all suggestions.
+	 */
 	public void removeSuggestions() {
 		this.suggestions.clear();
 		super.fireIntervalRemoved(this, 1, suggestions.size());
 	}
 
+	/**
+	 * Add the given suggestions to the model.
+	 * @param suggestions The suggestions.
+	 */
 	public void addSuggestions(final List<LabeledObject<T>> suggestions) {
 		this.suggestions.addAll(suggestions);
 		super.fireIntervalAdded(this, 1, suggestions.size());
 		setSelectedItem(null);
 	}
 	
-	//-----------------------------------------------------
+	/**
+	 * Add the given suggestions to the model.
+	 * @param suggestions The suggestions.
+	 */
+	public void addSuggestion(final LabeledObject<T> suggestion) {
+		this.suggestions.add(suggestion);
+		super.fireIntervalAdded(this, 1, 1);
+		setSelectedItem(null);
+	}
 	
-	public Object getSelectedItem() {
+	/**
+	 * Add the given suggestions to the model.
+	 * @param suggestions The suggestions.
+	 */
+	public void addDefaultSuggestion(final LabeledObject<T> suggestion) {
+		this.suggestions.add(suggestion);
+		super.fireIntervalAdded(this, 1, 1);
+		setSelectedItem(suggestion);
+	}
+	
+	public SuggestionProvider<T> getProvider() {
+		return provider;
+	}
+	
+	public T getSelectedSuggestion(){
+		final LabeledObject<T> selected = getSelectedItem();
+		if (selected != null){
+			return selected.getValue();
+		} else {
+			return null;
+		}
+	}
+	
+	//-- ComboBoxModel ------------------------------------
+	
+	/* (non-Javadoc)
+	 * @see javax.swing.ComboBoxModel#getSelectedItem()
+	 */
+	public LabeledObject<T> getSelectedItem() {
 		return getElementAt(selectionIndex);
 	}
 	
+	/* (non-Javadoc)
+	 * @see javax.swing.ListModel#getElementAt(int)
+	 */
+	public LabeledObject<T> getElementAt(int index) {
+		if (index < 0 || index >= suggestions.size()){
+			return null;
+		}
+		return suggestions.get(index);
+	}
+
+	/* (non-Javadoc)
+	 * @see javax.swing.ListModel#getSize()
+	 */
+	public int getSize() {
+		return suggestions.size();
+	}
+
+	/* (non-Javadoc)
+	 * @see javax.swing.ComboBoxModel#setSelectedItem(java.lang.Object)
+	 */
+	public void setSelectedItem(final Object selected) {
+		this.selectionIndex = suggestions.indexOf(selected);
+	}
+	
+	// -----------------------------------------------------
+
 	public int selectNext(){
 		if (selectionIndex < (suggestions.size()-1)){
 			selectionIndex++;
@@ -71,21 +177,6 @@ public class SuggestionComboBoxModel<T> extends AbstractListModel implements Com
 		return selectionIndex;
 	}
 	
-	public void setSelectedItem(Object selected) {
-		this.selectionIndex = suggestions.indexOf(selected);
-	}
-
-	public Object getElementAt(int index) {
-		if (index < 0 || index >= suggestions.size()){
-			return null;
-		}
-		return suggestions.get(index);
-	}
-
-	public int getSize() {
-		return suggestions.size();
-	}
-	
 	public LabeledObject<T> findByLabel(final String input) {
 		for (LabeledObject<T> current : suggestions) {
 			if (current.equalsLabel(input)){
@@ -93,6 +184,24 @@ public class SuggestionComboBoxModel<T> extends AbstractListModel implements Com
 			}
 		}
 		return null;
+	}
+	
+	// -- LISTENERS -------------------------------
+	
+	public void addSelectionListener(final SelectionListener<T> listener){
+		listeners.add(listener);
+	}
+	
+	protected void fireElementSelected(T value){
+		for (SelectionListener<T> current : listeners) {
+			 current.elementSelected(value, ID);
+		}
+	}
+	
+	protected void fireSelectionFailed(){
+		for (SelectionListener<T> current : listeners) {
+			 current.selectionFailed(ID);
+		}
 	}
 	
 }
