@@ -17,7 +17,7 @@ package de.lichtflut.infra.ui.flow;
 
 import javax.swing.JPanel;
 
-import de.lichtflut.infra.ui.event.ModelChangeListener;
+import de.lichtflut.infra.ui.event.ModelObserver;
 
 /**
  * The view of an interactive step.
@@ -26,7 +26,7 @@ import de.lichtflut.infra.ui.event.ModelChangeListener;
  *
  * @author Oliver Tigges
  */
-public interface InteractiveStepView extends ModelChangeListener<Object> {
+public interface InteractiveStepView extends ModelObserver<Object> {
 	
 	/**
 	 * Accessor for the content pane of the view.

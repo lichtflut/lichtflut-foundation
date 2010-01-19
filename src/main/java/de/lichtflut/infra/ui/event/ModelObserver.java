@@ -26,7 +26,7 @@ package de.lichtflut.infra.ui.event;
  * 
  * @author Oliver Tigges 
  */
-public interface ModelChangeListener<T> {
+public interface ModelObserver<T> {
 	
 	void modelChanged(ModelChangeEvent<T> evt);
 

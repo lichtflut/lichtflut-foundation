@@ -20,7 +20,7 @@ import java.util.Map;
 
 import de.lichtflut.infra.Infra;
 import de.lichtflut.infra.ui.event.ModelChangeEvent;
-import de.lichtflut.infra.ui.event.ModelChangeListener;
+import de.lichtflut.infra.ui.event.ModelObserver;
 import de.lichtflut.infra.ui.event.ModelChangeType;
 
 /**
@@ -34,7 +34,7 @@ public abstract class AbstractFlowModel {
 	
 	public static final String ACTION_SOURCE_ANY = "action.source.any";
 	
-	private final Map<ModelChangeListener<?>, String> listeners = new HashMap<ModelChangeListener<?>, String>();
+	private final Map<ModelObserver<?>, String> listeners = new HashMap<ModelObserver<?>, String>();
 	
 	// ------------------------------------------------------
 	
@@ -42,7 +42,7 @@ public abstract class AbstractFlowModel {
 	 * Add a listener notified about changes.
 	 * @param actionId The action Id
 	 */
-	public void addChangeListener(final ModelChangeListener<?> listener){
+	public void addChangeListener(final ModelObserver<?> listener){
 		this.listeners.put(listener, ACTION_SOURCE_ANY);
 	}
 	
@@ -50,7 +50,7 @@ public abstract class AbstractFlowModel {
 	 * Add a listener notified about changes.
 	 * @param actionId The action Id
 	 */
-	public void addChangeListener(final ModelChangeListener<?> listener, final String actionId){
+	public void addChangeListener(final ModelObserver<?> listener, final String actionId){
 		this.listeners.put(listener, actionId);
 	}
 	
@@ -72,7 +72,7 @@ public abstract class AbstractFlowModel {
 	
 	@SuppressWarnings("unchecked")
 	protected void fireModelChange(final ModelChangeEvent<?> e){
-		for (ModelChangeListener l : listeners.keySet()) {
+		for (ModelObserver l : listeners.keySet()) {
 			final String source = listeners.get(l);
 			if (ACTION_SOURCE_ANY.equals(source) || Infra.equals(e.getSource(), source)){
 				l.modelChanged(e);
