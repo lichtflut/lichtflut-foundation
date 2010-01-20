@@ -117,15 +117,6 @@ public class SuggestionComboBoxModel<T> extends AbstractListModel implements Com
 		return provider;
 	}
 	
-	public T getSelectedSuggestion(){
-		final LabeledObject<T> selected = getSelectedItem();
-		if (selected != null){
-			return selected.getValue();
-		} else {
-			return null;
-		}
-	}
-	
 	//-- ComboBoxModel ------------------------------------
 	
 	/* (non-Javadoc)
