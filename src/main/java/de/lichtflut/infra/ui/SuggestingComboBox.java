@@ -199,7 +199,7 @@ public abstract class SuggestingComboBox<T> extends JComboBox
 	 */
 	private class SelectObserver extends KeyAdapter implements ItemListener, MouseListener {
 		
-		private boolean ignoreEvents = false;
+		private boolean ignoreSelections = false;
 		
 		// ------------------------------------------------------
 		
@@ -209,16 +209,20 @@ public abstract class SuggestingComboBox<T> extends JComboBox
 		@Override
 		public void keyPressed(final KeyEvent e) {
 			Log.info(this, "key event: " + e);
-			ignoreEvents = true;
+			
+			ignoreSelections = true;
+			
 			switch (e.getKeyCode()){
 			case KeyEvent.VK_UP:
 				if (Platform.isMac()){
 					setSelectedIndex(model.selectPrevious());
+					ignoreSelections = false;
 				}
 				break;
 			case KeyEvent.VK_DOWN:
 				if (Platform.isMac()){
 					setSelectedIndex(model.selectNext());
+					ignoreSelections = false;
 				}
 				break;
 			case KeyEvent.VK_TAB:
@@ -226,6 +230,8 @@ public abstract class SuggestingComboBox<T> extends JComboBox
 				editor.setFocusTraversalKeysEnabled(true);
 				fireSelection();
 				break;
+			default:
+				ignoreSelections = false;
 			}
 		}
 
@@ -233,12 +239,13 @@ public abstract class SuggestingComboBox<T> extends JComboBox
 		 * @see java.awt.event.ItemListener#itemStateChanged(java.awt.event.ItemEvent)
 		 */
 		public void itemStateChanged(final ItemEvent evt) {
-			Log.info(this, "item event: " + evt);
 			if (ItemEvent.SELECTED == evt.getStateChange()){
-				if (!ignoreEvents){
+				if (!ignoreSelections){
+					Log.info(this, "item select event: " + evt);
 					fireSelection();
 				} else {
-					ignoreEvents = false;
+					Log.info(this, "item select event ignored: " + evt);
+					ignoreSelections = false;
 				}
 			}
 		}
