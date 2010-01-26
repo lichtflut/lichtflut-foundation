@@ -5,13 +5,13 @@
 	<parent>
 		<groupId>org.arastreju</groupId>
 		<artifactId>arastreju</artifactId>
-		<version>0.4.0</version>
+		<version>0.4.1-SNAPHOT</version>
 	</parent>
 
 	<groupId>de.lichtflut</groupId>
 	<artifactId>infra</artifactId>
 	<name>Foundation Infrastructure</name>
-	<version>1.0.5</version>
+	<version>1.0.6-SNAPHOT</version>
 	<description>infrastructure stuff</description>
 	
 	<build>
