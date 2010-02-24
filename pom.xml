@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.arastreju</groupId>
 		<artifactId>arastreju</artifactId>
-		<version>0.4.1-SNAPHOT</version>
+		<version>0.4.1-SNAPSHOT</version>
 	</parent>
 
 	<groupId>de.lichtflut</groupId>
