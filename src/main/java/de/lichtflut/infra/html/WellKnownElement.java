@@ -46,7 +46,8 @@ public enum WellKnownElement {
 	TEXT,
 	H1,
 	H2,
-	H3;
+	H3,
+	A;
 	
 	public static WellKnownElement forValue(String value){
 		return WellKnownElement.valueOf(value.toUpperCase());

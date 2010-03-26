@@ -36,6 +36,9 @@ public final class MTISearchEngine {
 	//Members
 	//fields
 	MTIExtractor extractor;
+	public static final int SEARCH_MASK_TEXT_FLAG=1;
+	public static final int SEARCH_MASK_ATTRIBUTE_FLAG=2;
+	
 	
 	/*
 	 * private defaultConstructor,
@@ -45,36 +48,39 @@ public final class MTISearchEngine {
 	private MTISearchEngine(){}
 	
 	
-	public static List<HtmlElement> searchFor(SearchContext context,String keyword,HtmlFilter filter){
+	public static List<HtmlElement> searchFor(SearchContext context,String keyword,HtmlFilter filter, int depth,int mask){
 			List <String> keywords = new LinkedList<String>();
 			keywords.add(keyword);
-			return searchFor(context,keywords,filter);
+			return searchFor(context,keywords,filter,depth,mask);
 	}//Method searchFor() end
 	
 	
-	public static List<HtmlElement> searchFor(SearchContext context,List<String> keywords,HtmlFilter filter){
+	public static List<HtmlElement> searchFor(SearchContext context,List<String> keywords,HtmlFilter filter, int depth, int mask){
 		List<HtmlElement> result = context.getAccessor().getResult(filter);
 		List<HtmlElement> output = new LinkedList<HtmlElement>();
 		for(HtmlElement elem: result)
-			searchRecursive(elem,keywords,output);
+			searchRecursive(elem,keywords,output,depth,mask);
 		return output;
 	}
 	
-	private static void searchRecursive(HtmlElement node,List<String> keywords,List<HtmlElement>output){
-		if(node instanceof HtmlText){
-			for(String keyword: keywords) //iterate over keywords
-				if(node.getText().toLowerCase().contains(keyword.toLowerCase().subSequence(0,keyword.length())))
+	private static void searchRecursive(HtmlElement node,List<String> keywords,List<HtmlElement>output, int depth, int mask){
+
+		if(depth==0) return;
+			for(String keyword: keywords){ //iterate over keywords
+				if(((SEARCH_MASK_TEXT_FLAG & mask)==SEARCH_MASK_TEXT_FLAG)&& node instanceof HtmlText && node.getText().toLowerCase().contains(keyword.toLowerCase().subSequence(0,keyword.length()))){
 					if(!output.contains(node)) output.add(node); //check if this node already exsits
-		}else{
+				}else if((SEARCH_MASK_ATTRIBUTE_FLAG & mask)==SEARCH_MASK_ATTRIBUTE_FLAG && (node.getAttributes().containsKey(keyword) || node.getAttributes().containsValue(keyword))){
+					if(!output.contains(node)) output.add(node); //check if this node already exsits
+				}
+			}
 			if(node.getChildren()!=null){
 				for(HtmlElement elem: node.getChildren()){
-					searchRecursive(elem,keywords,output);
+					searchRecursive(elem,keywords,output,(depth<0 ? -1 : (depth-1)),mask);
 				}//end of for
 			}//end of if
-		}//end of else
 	}//End of methodSearchRecursive
 	
-	
+
 	public static Tuple<Integer,Integer> getFirstTableIndex(SearchContext context,HtmlTable table, String keyword){
 		HtmlElement[][] cells = table.table;
 		if(cells==null) return null;
