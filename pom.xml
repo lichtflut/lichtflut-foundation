@@ -1,17 +1,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	
-	<parent>
-		<groupId>org.arastreju</groupId>
-		<artifactId>arastreju</artifactId>
-		<version>0.4.1-SNAPSHOT</version>
-	</parent>
 
 	<groupId>de.lichtflut</groupId>
 	<artifactId>infra</artifactId>
 	<name>Foundation Infrastructure</name>
-	<version>1.0.6-SNAPSHOT</version>
+	<version>1.0.7</version>
 	<description>infrastructure stuff</description>
 	
 	<build>
@@ -40,15 +34,37 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.4.2</version>
 				<configuration>
 					<skipTests>true</skipTests>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.5</source>
+					<target>1.5</target>
+				</configuration>
+			</plugin>
+			<plugin>
+		        <groupId>org.apache.maven.plugins</groupId>
+		        <artifactId>maven-source-plugin</artifactId>
+		      </plugin>
 		</plugins>
 	</build>
 	
 	<dependencies>
+		<dependency>
+			 <groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>1.5.10</version>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.5</version>
+			<scope>test</scope>
+		</dependency>
 		<dependency>
 			<groupId>org.jdom</groupId>
 			<artifactId>jdom</artifactId>
@@ -72,4 +88,37 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+	
+	<pluginRepositories>
+		<pluginRepository>
+			<id>maven2-repository.dev.java.net</id>
+			<name>Java.net Maven 2 Repository</name>
+			<url>http://download.java.net/maven/2</url>
+		</pluginRepository>
+		<pluginRepository>
+			<id>mc-release</id>
+			<name>Local Maven repository of releases</name>
+			<url>http://mc-repo.googlecode.com/svn/maven2/releases</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+		</pluginRepository>
+	</pluginRepositories>
+	
+	<distributionManagement>
+		<repository>
+			<id>lf-rep</id>
+			<name>lichtflut archiva repository</name>
+			<url>http://www.lichtflut.de:15080/archiva/repository/lf-rep/</url>
+		</repository>
+		<snapshotRepository>
+			<id>lf-rep</id>
+			<name>lichtflut archiva repository</name>
+			<url>http://www.lichtflut.de:15080/archiva/repository/lf-rep/</url>
+		</snapshotRepository>
+	</distributionManagement>
+	
 </project>
