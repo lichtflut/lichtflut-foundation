@@ -1,5 +1,0 @@
-Manifest-Version: 1.0
-Class-Path: activation-1.1.jar javax.persistence-2.0.0.jar jaxb-api-2.
- 1.jar jaxb-impl-2.1.9.jar jdom-1.1.jar log4j-1.2.14.jar slf4j-api-1.5
- .10.jar slf4j-log4j12-1.5.10.jar stax-api-1.0-2.jar
-
