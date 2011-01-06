@@ -11,6 +11,7 @@
 		<module>infra</module>
 		<module>persistence</module>
 		<module>xml</module>
+		<module>wicket</module>
 	</modules>
 	<build>
 		<plugins>
@@ -24,6 +25,7 @@
 					</headerDefinitions>
 					<excludes>
 						<exclude>header.xml</exclude>
+						<exclude>.git</exclude>
 						<exclude>src\main\resources\xhtml\*.ent</exclude>
 					</excludes>
 				</configuration>
