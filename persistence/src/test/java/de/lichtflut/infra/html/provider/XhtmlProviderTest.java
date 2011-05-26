@@ -27,7 +27,6 @@ import org.jdom.Element;
 import org.xml.sax.InputSource;
 
 import de.lichtflut.infra.html.HtmlDocument;
-import de.lichtflut.infra.html.provider.XhtmlProvider;
 import de.lichtflut.infra.io.UrlReader;
 import de.lichtflut.infra.logging.Log;
 import de.lichtflut.infra.xml.XmlReader;

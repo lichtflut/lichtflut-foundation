@@ -21,8 +21,6 @@ package de.lichtflut.infra.http;
 import java.util.Collections;
 
 import junit.framework.TestCase;
-import de.lichtflut.infra.http.HttpClient;
-import de.lichtflut.infra.http.HttpRequestException;
 
 /**
  * 

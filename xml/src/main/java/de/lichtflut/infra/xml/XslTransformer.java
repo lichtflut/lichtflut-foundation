@@ -32,8 +32,6 @@ import javax.xml.transform.stream.StreamSource;
 import org.jdom.Element;
 import org.jdom.JDOMException;
 
-import de.lichtflut.infra.xml.XmlReader;
-
 /**
  * 
  * Helper-Class for XML-Transformation.

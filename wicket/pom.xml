@@ -11,19 +11,24 @@
 	<name>Foundation Wicket</name>
 	<description>Foundation Wicket Extensions</description>
 	<properties>
-		<wicket.version>1.5-M3</wicket.version>
+		<wicket.version>1.5-rc2</wicket.version>
 		<jetty.version>6.1.25</jetty.version>
 	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>de.lichtflut</groupId>
 			<artifactId>lf.foundation.infra</artifactId>
-			<version>${version}</version>
+			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.wicket</groupId>
-			<artifactId>wicket</artifactId>
+			<artifactId>wicket-core</artifactId>
 			<version>${wicket.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>1.6.1</version>
 		</dependency>
 		<!--  JETTY DEPENDENCIES FOR TESTING  -->
 		<dependency>

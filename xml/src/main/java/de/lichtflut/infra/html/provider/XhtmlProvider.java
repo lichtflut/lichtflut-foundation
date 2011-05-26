@@ -20,7 +20,6 @@ package de.lichtflut.infra.html.provider;
 
 import java.util.List;
 
-
 import org.jdom.Attribute;
 import org.jdom.Content;
 import org.jdom.Document;

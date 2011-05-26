@@ -19,23 +19,16 @@
 				<groupId>com.google.code.maven-license-plugin</groupId>
 				<artifactId>maven-license-plugin</artifactId>
 				<configuration>
-					<header>license.txt</header>
+					<header>${basedir}/license.txt</header>
 					<headerDefinitions>
 						<headerDefinition>header.xml</headerDefinition>
 					</headerDefinitions>
 					<excludes>
 						<exclude>header.xml</exclude>
-						<exclude>.git</exclude>
-						<exclude>src\main\resources\xhtml\*.ent</exclude>
+						<exclude>.git/**</exclude>
+						<exclude>src/main/resources/xhtml/*.ent</exclude>
 					</excludes>
 				</configuration>
-				<executions>
-					<execution>
-						<goals>
-							<goal>check</goal>
-						</goals>
-					</execution>
-				</executions>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -69,11 +62,6 @@
 		</plugins>
 	</build>
 	<dependencies>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
-			<version>1.5.10</version>
-		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>

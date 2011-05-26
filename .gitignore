@@ -5,3 +5,7 @@ target
 .idea
 *.iml
 pom-conf.tmproj
+infra/bin
+persistence/bin
+xml/bin
+wicket/bin
