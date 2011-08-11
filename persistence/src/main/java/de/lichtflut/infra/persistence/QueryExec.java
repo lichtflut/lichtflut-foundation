@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009 lichtflut Forschungs- und Entwicklungsgesellschaft mbH
+ * Copyright (C) 2011 lichtflut Forschungs- und Entwicklungsgesellschaft mbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,9 +30,13 @@ import javax.persistence.Query;
  */
 public class QueryExec {
 	
-	@SuppressWarnings("unchecked")
+	/**
+	 * Get the first query result or <code>null</code>.
+	 * @param query The query.
+	 * @return the first query result or <code>null</code>.
+	 */
 	public static Object firstResult(Query query){
-		List resultList = query.getResultList();
+		final List<?> resultList = query.getResultList();
 		if (resultList.isEmpty()){
 			return null;
 		} else {
