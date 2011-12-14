@@ -87,6 +87,12 @@
 			</releases>
 		</pluginRepository>
 	</pluginRepositories>
+	<repositories>
+		<repository>
+			<id>repo1</id>
+			<url>http://repo1.maven.org/maven2</url>
+		</repository>
+	</repositories>
 	<distributionManagement>
 		<repository>
 			<id>lf-releases</id>
