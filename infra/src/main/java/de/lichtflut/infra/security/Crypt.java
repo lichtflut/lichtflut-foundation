@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009 lichtflut Forschungs- und Entwicklungsgesellschaft mbH
+ * Copyright (C) 2012 lichtflut Forschungs- und Entwicklungsgesellschaft mbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,34 +13,31 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-/**
- * 
- */
 package de.lichtflut.infra.security;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 /**
+ * <p>
+ * 	Utility class for encoding/crypting of data.
+ * </p>
  * 
- * Copyright 2008 by Oliver Tigges
+ * <p>
+ * 	Created: 08.12.2008
+ * </p>
  * 
  * @author Oliver Tigges
- * 
- * Created: 08.12.2008
- *
- * Description:
  */
 public class Crypt {
 	
 	private static final String MD5 = "MD5";
 
 	public static String md5Hex(Object obj){
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		byte[] hash = md5(obj);
-		for (byte b : hash) {
-			int i = (255 + b) % 255; 
-			sb.append(Integer.toHexString(i));
+		for (int i = 0; i < hash.length; ++i) {
+			sb.append(Integer.toHexString((hash[i] & 0xFF) | 0x100).substring(1, 3));
 		}
 		return sb.toString();
 	}
@@ -54,12 +51,4 @@ public class Crypt {
 		}
 	}
 	
-	//-----------------------------------------------------
-	
-	public static void main(String[] args){
-		String orig = "root";
-		System.out.println("md5 for '" + orig + "' ==> " + md5(orig));
-		System.out.println("md5Hex for '" + orig + "' ==> " + md5Hex(orig));
-	}
-
 }
