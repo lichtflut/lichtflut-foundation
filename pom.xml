@@ -4,14 +4,13 @@
 	<groupId>de.lichtflut</groupId>
 	<artifactId>lf.foundation</artifactId>
 	<name>lichtflut Foundation</name>
-	<version>1.1.1-SNAPSHOT</version>
+	<version>1.1.2-SNAPSHOT</version>
 	<description>tools, utils and infrastructure stuff</description>
 	<packaging>pom</packaging>
 	<modules>
 		<module>infra</module>
 		<module>persistence</module>
 		<module>xml</module>
-		<module>wicket</module>
 	</modules>
 	<build>
 		<plugins>
